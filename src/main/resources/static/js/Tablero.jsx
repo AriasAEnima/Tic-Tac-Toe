@@ -1,9 +1,16 @@
 // Retorna la url del servicio. Es una función de configuración.
 
 function BBServiceURL() {
-    var chost=window.location.host; 
+    var chost=window.location.host;
+    var nprotocol="";
+    if(window.location.protocol=='http:'){
+        nprotocol="ws";
+    }else{
+        nprotocol="wss";
+    }
+    console.log(window.location.protocol); 
     console.log(chost); 
-    return 'wss://'+chost+'/TableroService';
+    return nprotocol+'://'+chost+'/TableroService';
 }
 class WSBBChannel {
     constructor(URL, callback,partida) {
@@ -38,6 +45,11 @@ class WSBBChannel {
         console.log("sending: ", msg);
         this.wsocket.send(msg);
     }   
+    sendRestart(id,f,s){
+        let msg = '{ "id": "'+ (id) +'" ,"f": ' + (f) + ', "s": "' + (s) + '" , "reiniciar": true}';
+        console.log("sending: ", msg);
+        this.wsocket.send(msg);
+    }
 }
 
 
@@ -79,21 +91,23 @@ class Tablero extends React.Component {
                                 (msg) => {
                             console.log("On func call back ", msg);
                             var obj = JSON.parse(msg);
+                            
                             if (obj.f != undefined) {
                                 this.retomarficha(obj.f, obj.s);
-                            } else {
+                            } else if (obj.reiniciar!=undefined){
+                                console.log("llego un reinicio");
+                                this.setState({
+                                    fichas: ["","","","","","","","",""]
+                                });
+                            }else {
                                 this.setState({
                                     signo: obj.s
                                 });
                             }
                         },this.state.partida);                        
                     });        
-        }
-      
-    
+        }        
     }  
-
-
     
     retomarficha(f,s){
         var fichast=this.state.fichas;
@@ -119,6 +133,8 @@ class Tablero extends React.Component {
         this.setState({
             fichas: ["", "", "", "", "", "", "", "", ""]
         });       
+        let wsreference = this.comunicationWS;
+        wsreference.sendRestart(this.state.partida,null,this.state.signo);   
     } 
     
     guardar(){
