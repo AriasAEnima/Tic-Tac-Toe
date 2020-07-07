@@ -2,6 +2,7 @@
 
 function BBServiceURL() {
     var chost=window.location.host; 
+    console.log(chost=window.location.host); 
     return 'ws://'+chost+'/TableroService';
 }
 class WSBBChannel {
