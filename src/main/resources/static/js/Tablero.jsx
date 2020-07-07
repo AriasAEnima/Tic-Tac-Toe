@@ -109,6 +109,20 @@ class Tablero extends React.Component {
         }        
     }  
     
+    traerEstadoServidor(){               
+        const data = new FormData();       
+        data.append('id', this.state.partida);                      
+        fetch('/partida', {
+            method: 'POST',
+            body: data
+        })
+                .then(response=> response.json())
+                .then(dataresponse=>{                        
+                    this.setState({ enPartida: true , fichas: dataresponse.fichas});                                  
+                });                 
+        
+    }
+    
     actualizarficha(f){
         var fichast=this.state.fichas;
         if (fichast[f]==""){
@@ -214,6 +228,9 @@ class Tablero extends React.Component {
                         </div>
                         <button onClick={()=> this.reiniciar()}> Reinicie! </button>  
                         <button onClick={()=> this.guardar()}> Guardar! </button>  
+                        <button onClick={()=> this.traerEstadoServidor()}> Ultimo Estado Guardado! </button>
+                                
+            
 
                   
 
