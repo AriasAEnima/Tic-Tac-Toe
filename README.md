@@ -2,6 +2,10 @@
 
 Una app web que permite jugar online a través de salas independientes.
 
+![vista](generalmedia/vista.PNG)
+
+
+
 ## LOC/h
 
 Gaste aprox 14 horas.
