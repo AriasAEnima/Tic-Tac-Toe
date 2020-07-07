@@ -31,18 +31,18 @@ public class WebController {
         return "{\"status\":\"Greetings from Spring Boot Ping Pong Synergy "
                 + java.time.LocalDate.now() + ", "
                 + java.time.LocalTime.now()
-                + ". " + "The server is Running! and Add some tableros"+repository.findById("1").get()+"\"}";
+                + ". " + "The server is Running! aqui el tablero 1 " +repository.findById("1").get()+"\"}";
     }
     
     @PostMapping("/guardar")   
     @ResponseBody
-    public void reiniciar(@RequestParam(value = "id") String id, @RequestParam(value = "fichas") String[] fichas) {        
+    public void guardar(@RequestParam(value = "id") String id, @RequestParam(value = "fichas") String[] fichas) {        
          repository.save(new Tablero(id, fichas));
     }
     
         
     @PostMapping("/partida")
-    public String sign(@RequestParam(value = "id") String id) {      
+    public String ingresar(@RequestParam(value = "id") String id) {      
 
         Optional<Tablero> t=repository.findById(id);
         if(t.isPresent()){

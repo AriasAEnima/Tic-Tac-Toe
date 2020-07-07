@@ -109,13 +109,6 @@ class Tablero extends React.Component {
         }        
     }  
     
-    retomarficha(f,s){
-        var fichast=this.state.fichas;
-        fichast[f]=s;
-        this.setState({ fichas: fichast  });                             
-                          
-    }
-    
     actualizarficha(f){
         var fichast=this.state.fichas;
         if (fichast[f]==""){
@@ -128,6 +121,16 @@ class Tablero extends React.Component {
         }         
         
     }
+    
+    
+    retomarficha(f,s){
+        var fichast=this.state.fichas;
+        fichast[f]=s;
+        this.setState({ fichas: fichast  });                             
+                          
+    }
+    
+
     
     reiniciar() {
         this.setState({

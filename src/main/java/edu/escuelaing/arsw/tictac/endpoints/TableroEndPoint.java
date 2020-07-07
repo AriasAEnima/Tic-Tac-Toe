@@ -49,7 +49,7 @@ public class TableroEndPoint {
     }
 
     @OnMessage
-    public void processFicha(String message, Session session) {
+    public void processFicha(String message, Session session) {       
         System.out.println("Ficha received:" + message + ". From session: "
                 + session);
        JSONObject json = new JSONObject(message);
