@@ -4,6 +4,10 @@ Una app web que permite jugar online a través de salas independientes.
 
 ## LOC/h
 
+Gaste aprox 14 horas.
+
+ 40 LOC/h
+
 ## Autor
 * **J. Eduardo Arias Barrera** -  [AriasAEnima](https://github.com/AriasAEnima)
 
