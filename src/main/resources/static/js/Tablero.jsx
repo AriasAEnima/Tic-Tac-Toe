@@ -1,7 +1,8 @@
 // Retorna la url del servicio. Es una función de configuración.
 
 function BBServiceURL() {
-    return 'ws://localhost:8080/TableroService';
+    var chost=window.location.host; 
+    return 'ws://'+chost+'/TableroService';
 }
 class WSBBChannel {
     constructor(URL, callback,partida) {

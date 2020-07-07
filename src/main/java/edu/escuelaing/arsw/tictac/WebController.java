@@ -12,6 +12,7 @@ package edu.escuelaing.arsw.tictac;
 
 import edu.escuelaing.arsw.tictac.entities.Tablero;
 import edu.escuelaing.arsw.tictac.repository.TableroRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,9 +42,16 @@ public class WebController {
     
         
     @PostMapping("/partida")
-    public String sign(@RequestParam(value = "id") String id) {
-        System.out.println("Enviando .... " + repository.findById(id).get().toJSON().toString());
-        return repository.findById(id).get().toJSON().toString();
+    public String sign(@RequestParam(value = "id") String id) {      
+
+        Optional<Tablero> t=repository.findById(id);
+        if(t.isPresent()){
+            System.out.println("Enviando .... " + repository.findById(id).get().toJSON().toString());
+           return t.get().toJSON().toString();
+        }else{
+            return new Tablero(id,new String[]{"","","","","","","","",""}).toJSON().toString();
+        }              
+     
     }    
 
 }
